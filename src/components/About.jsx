@@ -211,7 +211,7 @@ const About = () => {
               learning and adopting emerging technologies and techniques...
             </p>
             <motion.a
-              href="/resume.pdf"
+              href="./resume.pdf"
               download
               target="_blank"
               rel="noopener noreferrer"

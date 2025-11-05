@@ -56,18 +56,48 @@ npm run preview
 
 ## Deployment
 
+### Important: Fix for Blank Page Issue
+
+The project is configured with `base: '/'` in `vite.config.js` for root deployment. If you're deploying to a subdirectory (like GitHub Pages), you'll need to:
+
+1. Update `vite.config.js`:
+   ```javascript
+   base: '/your-repo-name/'
+   ```
+
+2. Rebuild:
+   ```bash
+   npm run build
+   ```
+
 ### Deploy to Vercel
 
 1. Push your code to GitHub
 2. Import your repository on [Vercel](https://vercel.com)
-3. Vercel will automatically detect Vite and configure the build settings
+3. Vercel will automatically detect Vite using `vercel.json`
+4. The configuration is already set up in `vercel.json`
 
 ### Deploy to Netlify
 
 1. Push your code to GitHub
 2. Import your repository on [Netlify](https://netlify.com)
-3. Set build command: `npm run build`
-4. Set publish directory: `dist`
+3. Netlify will use `netlify.toml` for configuration
+4. Build command: `npm run build`
+5. Publish directory: `dist`
+
+### Deploy to GitHub Pages
+
+1. Update `vite.config.js`:
+   ```javascript
+   base: '/your-repo-name/'
+   ```
+
+2. Build:
+   ```bash
+   npm run build
+   ```
+
+3. Deploy the `dist` folder to the `gh-pages` branch
 
 ## Project Structure
 
