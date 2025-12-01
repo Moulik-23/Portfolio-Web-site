@@ -10,6 +10,15 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 7,
+      title: 'Prism - AI Career Guidance',
+      category: 'AI Platform',
+      image: '/images/prism_ai_dashboard.png',
+      description: 'AI-powered career guidance platform with personalized advice, skills analysis, and 24/7 mentorship via Gemini AI.',
+      github: 'https://github.com/Moulik-23/Prism-AI',
+      tags: ['React', 'FastAPI', 'Gemini AI', 'MongoDB', 'Tailwind'],
+    },
+    {
       id: 1,
       title: 'Algerian Fire Analysis.',
       category: 'Machine Learning',
