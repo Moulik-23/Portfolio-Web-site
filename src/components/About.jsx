@@ -1,7 +1,12 @@
+import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const About = () => {
+gsap.registerPlugin(ScrollTrigger)
+
+export default function About() {
   const { ref: imageRef, inView: imageInView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
@@ -54,7 +59,7 @@ const About = () => {
   }
 
   return (
-    <section id="about" className="py-20 md:py-32 bg-gray-900">
+    <section id="about" className="py-20 md:py-32" style={{ backgroundColor: 'transparent' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* About Info Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
@@ -352,5 +357,3 @@ const About = () => {
     </section>
   )
 }
-
-export default About

@@ -1,0 +1,318 @@
+/* ===================================
+   PORTFOLIO THEME CSS
+   Color palette, typography, and base styles
+   =================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  /* === COLOR PALETTE === */
+  --bg: #0A0A0A;
+  --surface: #111111;
+  --border: #1F1F1F;
+  --accent: #6C63FF;
+  --f1-red: #E8002D;
+  --amber: #F59E0B;
+  --text-primary: #F0F0F0;
+  --text-muted: #6B6B6B;
+  --white: #FFFFFF;
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* === FONT SIZES === */
+  --fs-display: clamp(60px, 8vw, 120px); /* Hero display text */
+  --fs-h1: clamp(48px, 5vw, 72px);
+  --fs-h2: clamp(32px, 4vw, 48px);
+  --fs-h3: clamp(24px, 2.5vw, 36px);
+  --fs-body: 16px;
+  --fs-body-lg: 18px;
+  --fs-code: 14px;
+  --fs-caption: 12px;
+
+  /* === SPACING UNIT === */
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+  --space-128: 128px;
+
+  /* === SECTION PADDING === */
+  --section-pad-desktop: 120px;
+  --section-pad-mobile: 60px;
+
+  /* === TRANSITIONS === */
+  --transition-standard: 0.3s ease;
+  --transition-smooth: 0.5s ease-in-out;
+}
+
+/* ===================================
+   BASE STYLES
+   =================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === TYPOGRAPHY === */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+p {
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-standard);
+}
+
+a:hover {
+  color: var(--white);
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--fs-code);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: var(--space-8) var(--space-16);
+}
+
+/* === LAYOUT UTILITIES === */
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-pad-desktop) var(--section-pad-desktop);
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.section:first-of-type {
+  border-top: none;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--section-pad-mobile) var(--section-pad-mobile);
+  }
+}
+
+/* === BUTTONS & INTERACTIVE === */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16) var(--space-32);
+  border: 1px solid var(--accent);
+  background-color: transparent;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-standard);
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-standard);
+}
+
+.btn-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* === GRIDS & CONTAINERS === */
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--space-32);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-16);
+  }
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-48);
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-48);
+}
+
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+}
+
+/* === CARDS === */
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--space-32);
+  transition: all var(--transition-standard);
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+/* === UTILITY CLASSES === */
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-f1-red {
+  color: var(--f1-red);
+}
+
+.text-amber {
+  color: var(--amber);
+}
+
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: var(--fs-caption);
+  font-weight: 500;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.muted {
+  opacity: 0.6;
+}
+
+/* === REDUCED MOTION === */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === SCROLLBAR STYLING === */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* === SELECTION STYLING === */
+
+::selection {
+  background-color: var(--accent);
+  color: var(--bg);
+}

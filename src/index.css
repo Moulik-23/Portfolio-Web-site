@@ -1,24 +1,15 @@
+/* Import theme variables and base styles */
+@import './theme.css';
+
+/* Tailwind CSS layers - kept for compatibility */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply bg-gray-900 text-gray-100 font-sans;
-  }
-}
+/* ===================================
+   LOADING ANIMATION STYLES
+   =================================== */
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Loading Animation Styles */
 .atom-spinner {
   width: 80px;
   height: 80px;
@@ -34,7 +25,7 @@
 .atom-spinner-core {
   width: 20px;
   height: 20px;
-  background: #0ea5e9;
+  background: var(--accent);
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -48,7 +39,7 @@
   width: 100%;
   height: 100%;
   border: 2px solid transparent;
-  border-top-color: #0ea5e9;
+  border-top-color: var(--accent);
   border-radius: 50%;
 }
 
@@ -85,4 +76,3 @@
     opacity: 0.7;
   }
 }
-

@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 
-const Navbar = () => {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,124 +26,163 @@ const Navbar = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
     setIsMobileMenuOpen(false)
   }
 
+  const navLinks = [
+    { label: 'About', id: 'about' },
+    { label: 'Skills', id: 'skills' },
+    { label: 'Projects', id: 'projects' },
+    { label: 'Contact', id: 'contact' },
+  ]
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-gray-900/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 40,
+        backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(10px)' : 'none',
+        borderBottom: isScrolled ? '1px solid var(--border)' : 'none',
+        transition: 'all var(--transition-standard)',
+      }}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a
-            href="#intro"
-            onClick={(e) => handleSmoothScroll(e, 'intro')}
-            className="text-2xl md:text-3xl font-bold text-white hover:text-primary-400 transition-colors"
-          >
-            Moulik.
-          </a>
+      <nav
+        className="container"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '80px',
+          padding: '0 var(--space-32)',
+        }}
+      >
+        {/* Logo */}
+        <Link
+          to="/"
+          style={{
+            fontSize: '24px',
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            textDecoration: 'none',
+            transition: 'color var(--transition-standard)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--accent)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--text-primary)'
+          }}
+        >
+          M.
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-48)',
+            '@media (max-width: 768px)': {
+              display: 'none',
+            },
+          }}
+        >
+          {navLinks.map((link) => (
             <a
-              href="#intro"
-              onClick={(e) => handleSmoothScroll(e, 'intro')}
-              className="text-gray-300 hover:text-white transition-colors font-medium"
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={(e) => handleSmoothScroll(e, link.id)}
+              style={{
+                textDecoration: 'none',
+                color: 'var(--text-primary)',
+                fontSize: 'var(--fs-body)',
+                fontWeight: 500,
+                transition: 'color var(--transition-standard)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--accent)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-primary)'
+              }}
             >
-              Intro
+              {link.label}
             </a>
-            <a
-              href="#about"
-              onClick={(e) => handleSmoothScroll(e, 'about')}
-              className="text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#works"
-              onClick={(e) => handleSmoothScroll(e, 'works')}
-              className="text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              Works
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleSmoothScroll(e, 'contact')}
-              className="text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              Say Hello
-            </a>
-          </div>
+          ))}
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-300 hover:text-white transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-gray-800">
-            <a
-              href="#intro"
-              onClick={(e) => handleSmoothScroll(e, 'intro')}
-              className="block text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              Intro
-            </a>
-            <a
-              href="#about"
-              onClick={(e) => handleSmoothScroll(e, 'about')}
-              className="block text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#works"
-              onClick={(e) => handleSmoothScroll(e, 'works')}
-              className="block text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              Works
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleSmoothScroll(e, 'contact')}
-              className="block text-gray-300 hover:text-white transition-colors font-medium"
-            >
-              Say Hello
-            </a>
-          </div>
-        )}
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          style={{
+            display: 'none',
+            backgroundColor: 'transparent',
+            border: 'none',
+            color: 'var(--text-primary)',
+            cursor: 'pointer',
+            '@media (max-width: 768px)': {
+              display: 'flex',
+            },
+          }}
+          className="mobile-menu-btn"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </nav>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div
+          style={{
+            display: 'none',
+            flexDirection: 'column',
+            gap: 'var(--space-24)',
+            padding: 'var(--space-32)',
+            borderTop: '1px solid var(--border)',
+            backgroundColor: 'var(--bg)',
+            '@media (max-width: 768px)': {
+              display: 'flex',
+            },
+          }}
+          className="mobile-menu"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={(e) => handleSmoothScroll(e, link.id)}
+              style={{
+                textDecoration: 'none',
+                color: 'var(--text-primary)',
+                fontSize: 'var(--fs-body)',
+                fontWeight: 500,
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <style>{`
+        @media (max-width: 768px) {
+          .mobile-menu-btn {
+            display: flex !important;
+          }
+          nav > div:first-of-type {
+            display: none;
+          }
+        }
+      `}</style>
     </header>
   )
 }
-
-export default Navbar
-
